@@ -1,0 +1,21 @@
+<div class="box">
+  <section>
+    <header class="module-heading">
+      <h3>Notícias</h3>
+    </header>
+
+    <table class="table table-striped">
+      <tbody>
+        {% for post in h.dadosabertos_wordpress_posts('all', 5) %}
+          <tr>
+            <td>
+            	<p><strong><a href="{{h.full_current_url()}}noticias/{{post.id}}">{{post.title.rendered}}</a></strong></p>
+            	<p>{{h.dadosabertos_BeautifulSoup(post.excerpt.rendered).text}}</p>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+  </section>
+</div>
