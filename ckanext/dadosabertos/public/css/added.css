@@ -1,0 +1,21 @@
+/* NOVAS Adicoes | Equipe UNIFEI */
+.logo-img a {
+  height: 110px !important;
+}
+.logo-img img {
+  margin: 10px 0px;
+  height: 100px;
+}
+
+
+/* Corrige tamanho e espaçamento do menu do header */
+header.masthead #barra-menu {
+	height: 34px;
+}
+header.masthead #menu-horizontal .barra-apoio {
+	margin: 0px;
+}
+
+footer li {
+	font-size: 13px;
+}

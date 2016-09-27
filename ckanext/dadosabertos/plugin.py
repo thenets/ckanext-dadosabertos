@@ -90,31 +90,45 @@ def most_recent_datasets():
 def wordpress_posts(type_content="", custom=10):
     # Get all posts
     if (type_content == "all"):
-        url = "https://blog.thenets.org/wp-json/wp/v2/posts?per_page="+str(custom)
+        url = "http://dadosabertos.thenets.org/wp-json/wp/v2/posts?per_page="+str(custom)
         posts = requests.get(url).json()
         return (posts)
 
     # Get single post
     if "noticias" in h.full_current_url():
-        post_id = h.full_current_url().split('/').pop()
-        url = "https://blog.thenets.org/wp-json/wp/v2/posts/"+str(post_id)
+        items_url = h.full_current_url().split('/')
+        items_url.pop() # remove slug
+        post_id = items_url.pop() # get post id
+        url = "http://dadosabertos.thenets.org/wp-json/wp/v2/posts/"+str(post_id)
         r = requests.get(url)
         print (url)
         return (r.json())
-
     pass
 
 
 
+# ============================================
+# Get Pages from Wordpress
+# ============================================
+def wordpress_pages(type_content="", custom=10):
+    # Get single post
+    if "paginas" in h.full_current_url():
+        items_url = h.full_current_url().split('/')
+        page_slug = items_url.pop() # get page slug
+        url = "http://dadosabertos.thenets.org/wp-json/wp/v2/pages?filter[name]="+str(page_slug)+"&_embed"
+        r = requests.get(url)
+        return (r.json()[0])
+    pass
 
 
 
+ 
 
 
 
+ 
 
-
-
+ 
 # ============================================
 # Main plugin class
 # ============================================
@@ -135,10 +149,14 @@ class DadosabertosPlugin(plugins.SingletonPlugin):
         toolkit.add_resource('fanstatic', 'dadosabertos')
 
     def after_map(self, map):
-        map.connect('/noticias/{id}',
+        map.connect('/noticias/{id}/{slug}',
                     controller='ckanext.dadosabertos.controller:NoticiasController',
                     action='index',
                     id=0)
+
+        map.connect('/paginas/{slug}',
+                    controller='ckanext.dadosabertos.controller:PaginasController',
+                    action='index')
         return map
 
 
@@ -153,4 +171,5 @@ class DadosabertosPlugin(plugins.SingletonPlugin):
         return {'dadosabertos_most_popular_groups': most_popular_groups,
             'dadosabertos_most_recent_datasets': most_recent_datasets,
             'dadosabertos_wordpress_posts': wordpress_posts,
+            'dadosabertos_wordpress_pages': wordpress_pages,
             'dadosabertos_BeautifulSoup': BeautifulSoup.BeautifulSoup }

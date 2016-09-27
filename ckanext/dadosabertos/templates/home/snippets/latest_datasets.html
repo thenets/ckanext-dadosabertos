@@ -8,7 +8,7 @@
       <thead>
         <tr>
           <th>Conjunto de dados</th>
-          <th>Organização</th>
+          <!-- <th>Organização</th> -->
           <th>Quando</th>
         </tr>
       </thead>
@@ -16,7 +16,7 @@
         {% for dadaset in h.dadosabertos_most_recent_datasets() %}
           <tr>
             <td><a href="{{dadaset.link}}" title="{{dadaset.title}}">{{dadaset.title}}</a></td>
-            <td title="{{dadaset.author}}">{{dadaset.author}}</td>
+            <!-- <td title="{{dadaset.author}}">{{dadaset.author}}</td> -->
             <td title="{{dadaset.timestamp}}">{{dadaset.time}}</td>
           </tr>
         {% endfor %}
