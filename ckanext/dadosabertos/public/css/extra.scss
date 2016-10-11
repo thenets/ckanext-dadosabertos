@@ -1,6 +1,16 @@
-
-/* Cabeçalho */
+// Cabeçalho
+// ==========================================================================
 header.masthead {
+  font-size: 0.9em; // FIX font-size
+
+  // Corrige tamanho e espaçamento do menu do header
+  #barra-menu {
+  	height: 34px;
+  }
+  #menu-horizontal .barra-apoio {
+  	margin: 0px;
+  }
+
   // Logo-imagem dos Dados Abertos
   .logo-img {
     a {
@@ -11,4 +21,67 @@ header.masthead {
       height: 100px;
     }
   }
+
+  // Barra de busca
+  .search-form {
+    float: right;
+    border: none;
+
+    .search-input {
+      width: 270px;
+    }
+  }
+
+} // END cabeçalho
+
+
+
+// Rodapé
+// ==========================================================================
+footer {
+  font-size: 0.9em; // FIX font-size
+
+  li {
+  	font-size: 13px;
+  }
+
+  #acesso-brasil-rodape {
+    .logo-acesso {
+      float: left;
+    }
+  }
+} // END rodapé
+
+
+
+// Notícias (Wordpress API)
+// ==========================================================================
+.noticia {
+  &#noticia-content {}
+
+  &#noticia-sidebar {
+    // Remove "Continuar lendo..." do Wordpress
+    .module-content a { display: none; }
+  }
 }
+
+
+// Páginas (Wordpress API)
+// ==========================================================================
+paginas {
+    padding-top: 2em;
+    padding-bottom: 2em;
+    padding-left: 2em;
+    padding-right: 2em;
+    border: 1px solid #7d99aa;
+    -moz-box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.3);
+    margin-bottom: 30px;
+    font-size: 16px;
+    line-height: 1.5em;
+}
+
+
+
+
+// END file

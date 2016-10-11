@@ -107,15 +107,28 @@ def wordpress_posts(type_content="", custom=10):
 
 
 
+# ============================================
+# Get Pages from Wordpress
+# ============================================
+def wordpress_pages(type_content="", custom=10):
+    # Get single post
+    if "paginas" in h.full_current_url():
+        items_url = h.full_current_url().split('/')
+        page_slug = items_url.pop() # get page slug
+        url = "http://dadosabertos.thenets.org/wp-json/wp/v2/pages?filter[name]="+str(page_slug)+"&_embed"
+        r = requests.get(url)
+        return (r.json()[0])
+    pass
 
 
 
+ 
 
 
 
+ 
 
-
-
+ 
 # ============================================
 # Main plugin class
 # ============================================
@@ -140,6 +153,10 @@ class DadosabertosPlugin(plugins.SingletonPlugin):
                     controller='ckanext.dadosabertos.controller:NoticiasController',
                     action='index',
                     id=0)
+
+        map.connect('/paginas/{slug}',
+                    controller='ckanext.dadosabertos.controller:PaginasController',
+                    action='index')
         return map
 
 
@@ -154,4 +171,5 @@ class DadosabertosPlugin(plugins.SingletonPlugin):
         return {'dadosabertos_most_popular_groups': most_popular_groups,
             'dadosabertos_most_recent_datasets': most_recent_datasets,
             'dadosabertos_wordpress_posts': wordpress_posts,
+            'dadosabertos_wordpress_pages': wordpress_pages,
             'dadosabertos_BeautifulSoup': BeautifulSoup.BeautifulSoup }
