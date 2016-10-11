@@ -2,7 +2,7 @@
 
 {% set placeholder = placeholder if placeholder else _('Search datasets...') %}
 
-<form {% if form_id %}id="{{ form_id }}" {% endif %}class="search-form{% if no_bottom_border %} no-bottom-border{% endif %}" method="get" data-module="select-switch">
+<form action="/dataset" {% if form_id %}id="{{ form_id }}" {% endif %}class="search-form{% if no_bottom_border %} no-bottom-border{% endif %}" method="get" data-module="select-switch">
 
   {% block search_input %}
     <div class="search-input control-group {{ search_class }}">

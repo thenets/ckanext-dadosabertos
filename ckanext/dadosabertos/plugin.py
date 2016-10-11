@@ -3,10 +3,12 @@ import ckan.plugins.toolkit as toolkit
 from ckan.lib.base import c, g, h, model
 
 # Dependence for Wordpress_Post
-import requests, json, BeautifulSoup 
+import requests, json, BeautifulSoup
 from ckan.plugins import implements, SingletonPlugin
 from ckan.plugins import IConfigurer
 from ckan.plugins import IRoutes
+import hashlib, os, json, time
+
 
 
 # ============================================
@@ -40,7 +42,7 @@ def most_recent_datasets():
 
         context = {'model': model, 'session': model.Session,
                    'user': c.user or c.author}
-  
+
         #model = context['model']
         query = model.Session.query(model.Package, model.Activity)
         query = query.filter(model.Activity.object_id==model.Package.id)
@@ -55,7 +57,7 @@ def most_recent_datasets():
         #from activity act
         #join package pck on pck.id = act.object_id
         #where act.activity_type = 'new package' and pck.state = 'active' order by act.timestamp desc;
-        
+
         #Trace of how i got to the final line =p
         #model_dictize.package_dictize
         #obj_list_dictize
@@ -87,12 +89,56 @@ def most_recent_datasets():
 # ============================================
 # Get News from Wordpress
 # ============================================
+def wordpress_cache_json(url):
+    # Check cache dir exists
+    cache_dir = '/tmp/ckan_cache/'
+    if(not os.path.isdir(cache_dir)):
+        os.makedirs(cache_dir)
+
+    # Cached file
+    f_key  = hashlib.md5(url).hexdigest()
+    f_name = cache_dir+'ckan_'+f_key
+
+    # Remove old cache file
+    # 14400 = 10 minutes
+    now = time.time()
+    if (os.path.isfile(f_name)):
+        if (os.stat(f_name).st_mtime < (now - 14400)):
+            unlink(f_name)
+
+    # Check if cached file exists
+    if (os.path.isfile(f_name)):
+        # Get JSON from cache
+        f       = open(f_name, 'r')
+        posts   = json.loads(f.read())
+        f.close()
+
+    else:
+        # Get JSON from URL
+        request = requests.get(url)        # Request of URL
+        posts   = request.json()
+
+        # Write cache file
+        f       = open(f_name, 'w')
+        f.write(request.text)
+        f.close()
+
+    return posts # Convert JSON to Python object
+
+
+
+
+# ============================================
+# Get News from Wordpress
+# ============================================
 def wordpress_posts(type_content="", custom=10):
     # Get all posts
     if (type_content == "all"):
-        url = "http://dadosabertos.thenets.org/wp-json/wp/v2/posts?per_page="+str(custom)
-        posts = requests.get(url).json()
-        return (posts)
+        # URL
+        url   = "http://dadosabertos.thenets.org/wp-json/wp/v2/posts?per_page="+str(custom)
+
+        # Get posts and return
+        return wordpress_cache_json(url)
 
     # Get single post
     if "noticias" in h.full_current_url():
@@ -100,9 +146,8 @@ def wordpress_posts(type_content="", custom=10):
         items_url.pop() # remove slug
         post_id = items_url.pop() # get post id
         url = "http://dadosabertos.thenets.org/wp-json/wp/v2/posts/"+str(post_id)
-        r = requests.get(url)
-        print (url)
-        return (r.json())
+
+        return wordpress_cache_json(url)
     pass
 
 
@@ -116,19 +161,19 @@ def wordpress_pages(type_content="", custom=10):
         items_url = h.full_current_url().split('/')
         page_slug = items_url.pop() # get page slug
         url = "http://dadosabertos.thenets.org/wp-json/wp/v2/pages?filter[name]="+str(page_slug)+"&_embed"
-        r = requests.get(url)
-        return (r.json()[0])
+
+        return wordpress_cache_json(url)[0]
     pass
 
 
 
- 
 
 
 
- 
 
- 
+
+
+
 # ============================================
 # Main plugin class
 # ============================================
@@ -141,13 +186,14 @@ class DadosabertosPlugin(plugins.SingletonPlugin):
 
     # Declare that this plugin will implement ITemplateHelpers.
     plugins.implements(plugins.ITemplateHelpers)
-    
+
     # IConfigurer
     def update_config(self, config_):
         toolkit.add_template_directory(config_, 'templates')
         toolkit.add_public_directory(config_, 'public')
         toolkit.add_resource('fanstatic', 'dadosabertos')
 
+    # Mapeamento das URLs
     def after_map(self, map):
         map.connect('/noticias/{id}/{slug}',
                     controller='ckanext.dadosabertos.controller:NoticiasController',
