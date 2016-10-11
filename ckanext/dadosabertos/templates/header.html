@@ -116,6 +116,9 @@
 
     </hgroup>
 
+
+      {% snippet 'snippets/search_field_header.html' %}
+
     {% block social_links %}
     <ul id="news">
       <li id="feed"><a rel="feed" href="/feed/" title="Inscrever-se no feed de notícias">feed</a></li>
@@ -125,7 +128,7 @@
     {% endblock %}
 
     <div class="content hidden">
-      
+
       {% block header_site_search %}
         <form class="section site-search simple-input" action="{% url_for controller='package', action='search' %}" method="get">
           <div class="field">

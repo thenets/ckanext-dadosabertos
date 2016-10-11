@@ -90,18 +90,19 @@ def most_recent_datasets():
 def wordpress_posts(type_content="", custom=10):
     # Get all posts
     if (type_content == "all"):
-        url = "https://blog.thenets.org/wp-json/wp/v2/posts?per_page="+str(custom)
+        url = "http://dadosabertos.thenets.org/wp-json/wp/v2/posts?per_page="+str(custom)
         posts = requests.get(url).json()
         return (posts)
 
     # Get single post
     if "noticias" in h.full_current_url():
-        post_id = h.full_current_url().split('/').pop()
-        url = "https://blog.thenets.org/wp-json/wp/v2/posts/"+str(post_id)
+        items_url = h.full_current_url().split('/')
+        items_url.pop() # remove slug
+        post_id = items_url.pop() # get post id
+        url = "http://dadosabertos.thenets.org/wp-json/wp/v2/posts/"+str(post_id)
         r = requests.get(url)
         print (url)
         return (r.json())
-
     pass
 
 
@@ -135,7 +136,7 @@ class DadosabertosPlugin(plugins.SingletonPlugin):
         toolkit.add_resource('fanstatic', 'dadosabertos')
 
     def after_map(self, map):
-        map.connect('/noticias/{id}',
+        map.connect('/noticias/{id}/{slug}',
                     controller='ckanext.dadosabertos.controller:NoticiasController',
                     action='index',
                     id=0)

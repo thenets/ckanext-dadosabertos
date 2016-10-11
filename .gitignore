@@ -43,3 +43,7 @@ docs/_build/
 
 # Replicated files
 ckanext-dadosabertos/
+
+# ATOM IDE
+.ftpconfig
+.remote-sync.json

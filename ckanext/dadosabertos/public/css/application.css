@@ -1590,11 +1590,11 @@ body {
     #site_logo {
         margin-top:0px;
     }
-    
+
     #site_logo h2 {
         line-height: 2.5;
     }
-    
+
     #site_logo a,
     #site_logo a:visited,
     #site_logo a:hover
@@ -1630,7 +1630,7 @@ body {
         font-size: 0.42em;
         height: 1px;
     }
-    
+
 
 /* Fim logo  */
 
@@ -2059,7 +2059,7 @@ body.no-sidebar .row .content-outer {
     font-weight: bold;
     font-size: medium;
     padding-left: 0px;
- 
+
 }
 
 #menu-lateral  {
@@ -2161,15 +2161,4 @@ body.no-sidebar .row .content-outer {
     width: 940px;
     padding-top:20px;
 
-}
-
-
-
-/* NOVAS Adicoes | Equipe UNIFEI */
-.logo-img a {
-  height: 110px !important;
-}
-.logo-img img {
-  margin: 10px 0px;
-  height: 100px;
 }

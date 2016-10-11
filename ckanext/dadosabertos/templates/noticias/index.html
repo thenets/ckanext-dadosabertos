@@ -1,6 +1,6 @@
 {% extends "page.html" %}
 
-{% block title %}{{ _('Notícias') }} - {{ super() }}{% endblock %}
+{% block title %}{{h.dadosabertos_wordpress_posts().title.rendered}} - {{ _('Notícias') }} - {{ super() }}{% endblock %}
 
 {% block breadcrumb_content %}
 {% endblock %}
@@ -23,7 +23,7 @@
       <article class="module">
         {% block page_header %}
           <header class="module-content page-header">
-            <h1>{{h.dadosabertos_wordpress_posts().title.rendered}}</h1>
+            <h1>{{h.dadosabertos_wordpress_posts().title.rendered|safe}}</h1>
           </header>
         {% endblock %}
         <div class="module-content">
