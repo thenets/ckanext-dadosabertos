@@ -86,6 +86,14 @@ def most_recent_datasets():
 
 
 
+
+# ============================================
+# Get Wordpress Domain
+# ============================================
+def wordpress_get_domain():
+    return 'http://dadosabertos.thenets.org'
+
+
 # ============================================
 # Get News from Wordpress
 # ============================================
@@ -102,26 +110,47 @@ def wordpress_cache_json(url):
     # Remove old cache file
     # 14400 = 10 minutes
     now = time.time()
+    file_is_old = False
     if (os.path.isfile(f_name)):
         if (os.stat(f_name).st_mtime < (now - 14400)):
-            unlink(f_name)
+            file_is_old = True
 
     # Check if cached file exists
-    if (os.path.isfile(f_name)):
+    if (os.path.isfile(f_name) and not file_is_old):
         # Get JSON from cache
         f       = open(f_name, 'r')
         posts   = json.loads(f.read())
         f.close()
 
+    # If cache file not exist or has expired
     else:
-        # Get JSON from URL
-        request = requests.get(url)        # Request of URL
-        posts   = request.json()
+        # Try to get JSON from URL
+        try:
+            request = requests.get(url, timeout=3)  # Request of URL
+            posts   = request.json()
+            if(request.status_code > 200):
+                raise
 
-        # Write cache file
-        f       = open(f_name, 'w')
-        f.write(request.text)
-        f.close()
+            # Remove old cache file
+            if (os.path.isfile(f_name)):
+                os.remove(f_name)
+
+            # Write cache file
+            f       = open(f_name, 'w')
+            f.write(request.text)
+            f.close()
+
+        # If can't get JSON from URL... return error message
+        except Exception as e:
+            error_post = {}
+            error_post["error"]    = True
+            error_post["title"]    = 'Nao pode ser carregado.'
+            error_post["content"]  = 'Nao pode ser carregado.<br>Tente novamente mais tarde.'
+            error_post["excerpt"]  = ''
+            error_post["modified"] = ''
+
+            return error_post
+
 
     return posts # Convert JSON to Python object
 
@@ -135,7 +164,7 @@ def wordpress_posts(type_content="", custom=10):
     # Get all posts
     if (type_content == "all"):
         # URL
-        url   = "http://dadosabertos.thenets.org/wp-json/wp/v2/posts?per_page="+str(custom)
+        url   = wordpress_get_domain()+"/wp-json/wp/v2/posts?per_page="+str(custom)
 
         # Get posts and return
         return wordpress_cache_json(url)
@@ -145,7 +174,7 @@ def wordpress_posts(type_content="", custom=10):
         items_url = h.full_current_url().split('/')
         items_url.pop() # remove slug
         post_id = items_url.pop() # get post id
-        url = "http://dadosabertos.thenets.org/wp-json/wp/v2/posts/"+str(post_id)
+        url = wordpress_get_domain()+"/wp-json/wp/v2/posts/"+str(post_id)
 
         return wordpress_cache_json(url)
     pass
@@ -160,9 +189,21 @@ def wordpress_pages(type_content="", custom=10):
     if "paginas" in h.full_current_url():
         items_url = h.full_current_url().split('/')
         page_slug = items_url.pop() # get page slug
-        url = "http://dadosabertos.thenets.org/wp-json/wp/v2/pages?filter[name]="+str(page_slug)+"&_embed"
+        url = wordpress_get_domain()+"/wp-json/wp/v2/pages?filter[name]="+str(page_slug)+"&_embed"
 
-        return wordpress_cache_json(url)[0]
+        # Check error
+        j = wordpress_cache_json(url)
+        if ('error' in j):
+            print(dir(j))
+            print(str(j.values()))
+            print('')
+            return j
+        else:
+            print(dir(j[0]))
+            print(str(j[0].values()))
+            print('') 
+            return j[0]
+
     pass
 
 
