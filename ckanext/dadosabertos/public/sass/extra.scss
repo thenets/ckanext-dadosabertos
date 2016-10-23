@@ -1,6 +1,8 @@
 // Global
 // ==========================================================================
 
+@import "_bugfix.scss";
+
 // Remove default CKAN background
 body {
   background: #034811;
@@ -21,11 +23,47 @@ a {
 
 
 
+// Bloco de busca da homepage
+body div[role='main'] form#search {
+  #busca {
+    width: 76%;
+    border: 1px solid rgba(0, 0, 0, 0.28);
+    margin: 0;
+  }
+  #btnbusca {
+    width: 19%;
+  }
+  p {
+    padding: 15px 5px 0;
+  }
+}
+
+// Tags da homepage
+body div[role='main'] #top_tags {
+  .tags  {
+    margin: 9px;
+  }
+}
+
+
 
 // Cabeçalho
 // ==========================================================================
 header.masthead {
   font-size: 0.9em; // FIX font-size
+
+  .debug {
+    background: rgba(0, 0, 0, 0.22);
+    z-index: 999;
+    padding: 6px 17px;
+    color: #aaa;
+    margin-top: 50px;
+    transition: 0.2s;
+
+    &:hover {
+      background: rgba(0, 0, 0, 1);
+    }
+  }
 
   // Corrige tamanho e espaçamento do menu do header
   #barra-menu {
@@ -156,11 +194,16 @@ header.masthead {
   box-shadow: 0 -7px 39px rgba(23, 117, 0, 0.42) inset;
 }
 
+
+
+
 // ==========================================================================
 // Responsive versions
 // ==========================================================================
+@import "_tablet.scss";
 @import "_mobile.scss";
-@import "_desktop.scss";
+
+
 
 
 // END file

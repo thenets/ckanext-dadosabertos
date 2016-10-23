@@ -17,7 +17,6 @@
   .primary, .secondary {
     .module {
       margin: 10px;
-
     }
 
     // Títulos de um módulo
@@ -34,17 +33,9 @@
 
 
   // Bloco de busca da homepage
+  // (escondido da home)
   body div[role='main'] form#search {
-    margin: 10px;
-    width: initial;
-
-    #busca {
-      width: 65%;
-    }
-
-    .faq-link {
-      display: block;
-    }
+    display: none;
   }
 
 
@@ -72,6 +63,8 @@
 
   // Cabeçalho
   body > header.masthead {
+    margin-bottom: 7px;
+
     // Links de acessibilidade no topo
     #accessibility {
       display: none !important;
@@ -113,22 +106,70 @@
     }
 
     // Links navegação
+    #barra-menu, #menu-horizontal {
+      height: 34px;
+    }
     #menu-horizontal {
+      height: 34px;
+
       .barra-apoio {
         float: none;
         text-align: center;
+        margin: 7px 1% 0;
+        padding-bottom: 11px;
+
+        margin: 0 1%;
+        width: 97%;
+      	white-space: nowrap;
+      	overflow-y: hidden;
+      	overflow-x: scroll;
+      	-webkit-overflow-scrolling: touch;
       }
 
-      // Visível em mobile
+      // Obrigatorios
       .link-dados, .link-aplicativos {
-        display: inline-block;
+        display: inline;
       }
 
-      // Escondido em mobile
+      // Que podem ser escondidos
       .link-perguntas-frequentes, .link-contato, .link-sobre {
-        display: none;
+        display: inline;
       }
     }
 
-  } // END cabeçalho
+  } // END cabeçalho,
+
+
+  // Pagina "Noticias" do Wordpress
+  // ==========================================================================
+  #noticia-sidebar {
+    .module-content {
+        margin: 0 10px !important;
+        padding: 40px;
+    }
+  }
+
+
+
+  // Pagina "Página única" do Wordpress
+  // ==========================================================================
+  #pagina {
+    .toolbar {
+      height: 1px;
+    }
+    #content {
+      font-size: 1.1em;
+      border: 0;
+      background: none;
+      margin: 0;
+      box-shadow: none;
+    }
+  }
+
+
+  // Debug area
+  // ==========================================================================
+  #debug-toggle {
+    margin: 20px 20px 20px;
+  }
 }

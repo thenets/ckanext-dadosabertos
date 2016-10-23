@@ -13,7 +13,17 @@
       {% block page_primary_action %}
         {% if h.check_access('package_create') %}
           <div class="page_primary_action">
-            {% link_for _('Add Dataset'), controller='package', action='new', class_='btn btn-primary', icon='plus-sign-alt' %}
+            <div class="btn-group">
+              <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="icon-plus-sign-alt"></i> Adicionar novo
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/dataset/new">Conjunto de Dados</a></li>
+                <li><a href="/inventariado/new">Inventariado</a></li>
+                <li><a href="/aplicativo/new">Aplicativo</a></li>
+              </ul>
+            </div>
           </div>
         {% endif %}
       {% endblock %}
