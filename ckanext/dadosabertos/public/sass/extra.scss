@@ -1,3 +1,27 @@
+// Global
+// ==========================================================================
+
+// Remove default CKAN background
+body {
+  background: #034811;
+}
+
+// Sidebar
+body div[role='main'] section{
+  h2 {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+// Links
+a {
+  color: #222;
+}
+
+
+
+
 // Cabeçalho
 // ==========================================================================
 header.masthead {
@@ -38,19 +62,32 @@ header.masthead {
 
 // Rodapé
 // ==========================================================================
-footer {
-  font-size: 0.9em; // FIX font-size
-
-  li {
-  	font-size: 13px;
+.footer {
+  &.outer {
+    position: relative; // FIX DEBUG area
+    border: none;
+    background: none;
   }
 
-  #acesso-brasil-rodape {
-    .logo-acesso {
-      float: left;
+  footer {
+    font-size: 0.9em; // FIX font-size
+
+
+
+    li {
+    	font-size: 13px;
+    }
+
+    #acesso-brasil-rodape {
+      .logo-acesso {
+        float: left;
+      }
     }
   }
-} // END rodapé
+}
+
+
+// END rodapé
 
 
 
@@ -101,6 +138,29 @@ footer {
 }
 
 
+// Debug area
+// ==========================================================================
+#debug-toggle {
+  opacity: 1 !important;
+  background: #81bb0f;
+  padding: 0 9px;
+  line-height: 38px;
+  border-radius: 4px;
+  border: 1px solid white;
+  margin: 0 20px 28px;
+  display: block;
+  width: 100px;
+  text-align: center;
+  color: white;
+  text-transform: uppercase;
+  box-shadow: 0 -7px 39px rgba(23, 117, 0, 0.42) inset;
+}
+
+// ==========================================================================
+// Responsive versions
+// ==========================================================================
+@import "_mobile.scss";
+@import "_desktop.scss";
 
 
 // END file

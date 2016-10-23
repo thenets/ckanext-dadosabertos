@@ -1,0 +1,134 @@
+// main: extra.scss
+@media (max-width: 767px) {
+  body {
+      padding-left: 0;
+      padding-right: 0;
+      background: none;
+  }
+
+  // Blocos genéricos de conteúdo do CKAN
+  // Exemplo: os blocos da homepage
+  .box {
+    margin: 10px;
+  }
+
+  // Modulos genéricos do CKAN
+  // Exemplo: os blocos da visualização de um dataset
+  .primary, .secondary {
+    .module {
+      margin: 10px;
+
+    }
+
+    // Títulos de um módulo
+    .module-narrow .module-heading, .module-narrow .module-content, .module-narrow .module-footer {
+      padding-left: 30px;
+    }
+
+    // Listas
+    .nav-simple > li, .nav-aside > li {
+      padding-left: 40px;
+    }
+  }
+
+
+
+  // Bloco de busca da homepage
+  body div[role='main'] form#search {
+    margin: 10px;
+    width: initial;
+
+    #busca {
+      width: 65%;
+    }
+
+    .faq-link {
+      display: block;
+    }
+  }
+
+
+  // Breadcrumb
+  .toolbar .breadcrumb {
+    padding: 0 16px;
+
+    li, li.home {
+      display: inline-block;
+      color: #999;
+      float: none;
+      margin: 14px 0 0;
+      font-size: 0.6em;
+    }
+    a {
+      color: #444;
+      padding: 0;
+      &.active {
+        font-size: 1.3em;
+      }
+    }
+  }
+
+
+
+  // Cabeçalho
+  body > header.masthead {
+    // Links de acessibilidade no topo
+    #accessibility {
+      display: none !important;
+    }
+
+    // Logo-imagem dos Dados Abertos
+    #site_logo {
+      float: none;
+      width: 100%;
+
+      .logo-img {
+        text-align: center;
+        img {
+          margin: 0 auto;
+          height: 100px;
+        }
+      }
+    }
+
+    // Links para o Github, RSS e Twitter
+    #news {
+      float: none;
+      margin: 10px auto;
+    }
+
+
+    // Barra de busca
+    .search-form {
+      float: none;
+      margin: 20px 0 20px;
+      padding: 0;
+      display: block;
+      width: 100%;
+      text-align: center;
+
+      .search-input {
+        margin: 0 auto;
+      }
+    }
+
+    // Links navegação
+    #menu-horizontal {
+      .barra-apoio {
+        float: none;
+        text-align: center;
+      }
+
+      // Visível em mobile
+      .link-dados, .link-aplicativos {
+        display: inline-block;
+      }
+
+      // Escondido em mobile
+      .link-perguntas-frequentes, .link-contato, .link-sobre {
+        display: none;
+      }
+    }
+
+  } // END cabeçalho
+}
