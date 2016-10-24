@@ -58,10 +58,12 @@ header.masthead {
     padding: 6px 17px;
     color: #aaa;
     margin-top: 50px;
-    transition: 0.2s;
+    max-width: 94%;
+    transition: 0.5s;
 
-    &:hover {
+    &:hover, &:focus, &:active {
       background: rgba(0, 0, 0, 1);
+      transition: 0.2s;
     }
   }
 
@@ -101,24 +103,44 @@ header.masthead {
 // Rodapé
 // ==========================================================================
 .footer {
+  overflow: hidden;
+
   &.outer {
     position: relative; // FIX DEBUG area
     border: none;
     background: none;
+
+    .divisor {
+      width: 50%;
+      display: block;
+      margin: 20px 10%;
+      color: #aaa;
+    }
   }
 
   footer {
     font-size: 0.9em; // FIX font-size
 
-
-
     li {
     	font-size: 13px;
     }
 
-    #acesso-brasil-rodape {
-      .logo-acesso {
+    #colophon {
+      margin: 26px 0 0;
+      a {
+        text-decoration: underline;
+        &:hover { color: white; cursor: pointer;}
+      }
+    }
+
+    #footer-logos {
+      margin-top: 30px;
+
+      .acesso-brasil-rodape {
         float: left;
+      }
+      .attribution {
+          margin-left: 130px;
       }
     }
   }
@@ -178,7 +200,11 @@ header.masthead {
 
 // Debug area
 // ==========================================================================
-#debug-toggle {
+#debug {
+    white-space: pre-line !important;
+    word-wrap: break-word !important;
+}
+#debug-toggle { // Button
   opacity: 1 !important;
   background: #81bb0f;
   padding: 0 9px;
@@ -196,14 +222,9 @@ header.masthead {
 
 
 
-
 // ==========================================================================
 // Responsive versions
 // ==========================================================================
-@import "_tablet.scss";
-@import "_mobile.scss";
-
-
 
 
 // END file
