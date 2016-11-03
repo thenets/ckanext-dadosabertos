@@ -1,6 +1,6 @@
 {
   "scheming_version": 1,
-  "dataset_type": "inventariado",
+  "dataset_type": "inventario",
   "about_url": "http://catalogo.governoeletronico.gov.br/manual_catalogo",
   "dataset_fields": [
     {

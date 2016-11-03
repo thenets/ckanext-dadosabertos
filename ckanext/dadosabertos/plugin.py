@@ -156,7 +156,6 @@ def wordpress_cache_json(url):
 
 
 
-
 # ============================================
 # Get News from Wordpress
 # ============================================
@@ -201,7 +200,7 @@ def wordpress_pages(type_content="", custom=10):
         else:
             print(dir(j[0]))
             print(str(j[0].values()))
-            print('') 
+            print('')
             return j[0]
 
     pass

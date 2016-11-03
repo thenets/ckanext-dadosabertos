@@ -111,10 +111,11 @@ header.masthead {
     background: none;
 
     .divisor {
-      width: 50%;
-      display: block;
-      margin: 20px 10%;
-      color: #aaa;
+      width: 90%;
+      display: inline-block;
+      margin: 36px auto 0;
+      border-top: 1px solid #75bb83;
+      padding: 0 72px;
     }
   }
 
@@ -142,6 +143,12 @@ header.masthead {
       .attribution {
           margin-left: 130px;
       }
+
+      #logo-brasil img {
+        @media (min-width: 980px) {
+          padding-right: 22px;
+        }
+      }
     }
   }
 }
@@ -154,7 +161,7 @@ header.masthead {
 // Notícias (Wordpress API)
 // ==========================================================================
 .noticia {
-  &#noticia-content {}
+  //&#noticia-content {}
 
   &#noticia-sidebar {
     // Remove "Continuar lendo..." do Wordpress
@@ -198,6 +205,21 @@ header.masthead {
 }
 
 
+// Novos datasets (forms)
+// ==========================================================================
+@media (min-width: 980px) {
+  .form-horizontal .control-label {
+    width: 170px;
+  }
+  .form-horizontal .controls {
+      margin-left: 180px;
+  }
+  .info-block [class^="icon-"] {
+    display: none;
+  }
+}
+
+
 // Debug area
 // ==========================================================================
 #debug {
@@ -225,6 +247,5 @@ header.masthead {
 // ==========================================================================
 // Responsive versions
 // ==========================================================================
-
 
 // END file
