@@ -1,29 +1,18 @@
 {% extends "page.html" %}
 
-{% block title %}{{ _('Notícias') }} - {{ super() }}{% endblock %}
+{% block title %}{{h.dadosabertos_wordpress_posts().title.rendered}} - {{ _('Notícias') }} - {{ super() }}{% endblock %}
 
 {% block breadcrumb_content %}
 {% endblock %}
 
 
 {% block primary %}
-  <div class="primary span9">
-    {#
-    The primary_content block can be used to add content to the page.
-    This is the main block that is likely to be used within a template.
-
-    Example:
-
-      {% block primary_content %}
-        <h1>My page content</h1>
-        <p>Some content for the page</p>
-      {% endblock %}
-    #}
+  <div id="noticia-content" class="noticia primary span9">
     {% block primary_content %}
       <article class="module">
         {% block page_header %}
           <header class="module-content page-header">
-            <h1>{{h.dadosabertos_wordpress_posts().title.rendered}}</h1>
+            <h1>{{h.dadosabertos_wordpress_posts().title.rendered|safe}}</h1>
           </header>
         {% endblock %}
         <div class="module-content">
@@ -36,7 +25,7 @@
 
 
 {% block secondary %}
-  <aside class="secondary span3">
+  <aside id="noticia-sidebar" class="noticia secondary span3">
     <div class="module-content">
       {% block secondary_content %}
         <h2>Resumo</h2>

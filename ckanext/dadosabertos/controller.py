@@ -16,3 +16,12 @@ class NoticiasController(p.toolkit.BaseController):
     	#pprint(dir(post))
     	c.post = post;
         return render('noticias/index.html')
+
+
+class PaginasController(p.toolkit.BaseController):
+    controller = 'ckanext.paginas.controller:PaginasController'
+
+    def index (page):
+    	#pprint(dir(page))
+    	c.page = page;
+        return render('paginas/index.html')

@@ -116,6 +116,9 @@
 
     </hgroup>
 
+
+      {% snippet 'snippets/search_field_header.html' %}
+
     {% block social_links %}
     <ul id="news">
       <li id="feed"><a rel="feed" href="/feed/" title="Inscrever-se no feed de notícias">feed</a></li>
@@ -125,7 +128,7 @@
     {% endblock %}
 
     <div class="content hidden">
-      
+
       {% block header_site_search %}
         <form class="section site-search simple-input" action="{% url_for controller='package', action='search' %}" method="get">
           <div class="field">
@@ -151,11 +154,13 @@
                 ('about', _('About'))
               ) }}
             {% endblock %} #}
-		<li class="first"><a href="/dataset/">Dados</a></li>
-		<li><a href="/aplicativos/">Aplicativos</a></li>
-                <li><a href="/faq/">Perguntas frequentes</a></li>
-                <li><a href="/contato/">Contato</a></li>
-                <li><a href="/sobre/">Sobre o portal</a></li>
+            		<li class="first link-dados"><a href="/dataset/">Dados</a></li>
+            		<!-- <li class="link-aplicativos"><a href="/aplicativo/">Aplicativos</a></li>
+            		<li class="link-inventarios"><a href="/inventario/">Inventários</a></li>
+            		<li class="link-concursos"><a href="/concurso/">Concursos</a></li> -->
+                <li class="link-perguntas-frequentes"><a href="/paginas/faq/">Perguntas frequentes</a></li>
+                <li class="link-contato"><a href="/paginas/contato/">Contato</a></li>
+                <li class="link-sobre"><a href="/paginas/sobre/">Sobre o portal</a></li>
           </ul>
         </nav>
       {% endblock %}

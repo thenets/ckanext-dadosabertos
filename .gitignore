@@ -43,3 +43,11 @@ docs/_build/
 
 # Replicated files
 ckanext-dadosabertos/
+
+# ATOM IDE
+.ftpconfig
+.remote-sync.json
+
+
+# Pylons / Python
+ckanext_dadosabertos.egg-info/*

@@ -4,7 +4,7 @@
       <div class="span7 col1">
         {% snippet 'snippets/search_field.html' %}
 
-        {% snippet 'home/snippets/tags.html' %}
+        {% snippet 'home/snippets/featured_organization.html' %}
       </div>
       <div class="span5">
         {% snippet 'home/snippets/latest_datasets.html' %}
@@ -26,11 +26,9 @@
       </div>
       <div class="span5">
         {% block featured_organization %}
-          {% snippet 'home/snippets/featured_organization.html' %}
+          {% snippet 'home/snippets/tags.html' %}
         {% endblock %}
       </div>
     </div>
   </div>
 </div>
-
-  
