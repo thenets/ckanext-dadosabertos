@@ -51,3 +51,5 @@ ckanext-dadosabertos/
 
 # Pylons / Python
 ckanext_dadosabertos.egg-info/*
+
+
