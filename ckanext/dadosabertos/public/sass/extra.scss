@@ -82,7 +82,7 @@ header.masthead {
     }
     img {
       margin: 10px 0px;
-      height: 100px;
+      height: 80px;
     }
   }
 
@@ -220,6 +220,43 @@ header.masthead {
 }
 
 
+
+// Package (página única dos datasets)
+// ==========================================================================
+.feedback-ouvidoria {
+    margin: 35px 0;
+    background-color: #ffffff;
+    border: 1px solid #d5d5d5;
+    border-top: 1px solid #d5d5d5;
+    font-size: 16px;
+    padding: 15px 20px;
+    text-align: center;
+
+    a {
+        padding: 15px 10px;
+        display: inline-block;
+    }
+    .fa {
+        display: inline-block;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: inherit;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        color: #2c66ce;
+    }
+    span {
+        color: #606060;
+        line-height: 1.4em;
+        font-size: 0.9375em;
+    }
+}
+
+
+
+
+
+
 // Debug area
 // ==========================================================================
 #debug {
@@ -247,11 +284,7 @@ header.masthead {
 // ==========================================================================
 // Responsive versions
 // ==========================================================================
-<<<<<<< HEAD
 @import "_mobile.scss";
 @import "_tablet.scss";
-
-=======
->>>>>>> cb8308c27f5103364b6ca95dbada4eb20a031e14
 
 // END file
